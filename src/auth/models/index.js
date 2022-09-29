@@ -6,7 +6,7 @@ const userModel = require('./users.js');
 const clothesModel = require('./clothes/model.js');
 const foodModel = require('./food/model.js');
 
-const DATABASE_URL = process.env.DATABASE_URL || 'sqlite:memory;';
+const DATABASE_URL = process.env.DATABASE_URL || 'sqlite:memory';
 
 const sequelize = new Sequelize(DATABASE_URL);
 const food = foodModel(sequelize, DataTypes);
@@ -15,7 +15,7 @@ const users = userModel(sequelize, DataTypes);
 
 module.exports = {
   db: sequelize,
-  users: new Collection(users),
+  users,
   food: new Collection(food),
   clothes: new Collection(clothes),
 };

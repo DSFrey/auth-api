@@ -11,7 +11,7 @@ const notFound = require('./error-handlers/404.js');
 const logger = require('./middleware/logger.js');
 
 const authRoutes = require('./auth/routes.js');
-const v1Routes = require('./routes/v1.js');
+const v1Routes = require('./auth/v1.js');
 
 // Prepare the express app
 const app = express();
