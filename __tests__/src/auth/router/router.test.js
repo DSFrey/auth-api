@@ -9,7 +9,7 @@ const server = require('../../../../src/server.js').server;
 const mockRequest = supertest(server);
 
 let userData = {
-  testUser: { username: 'user', password: 'password' },
+  testUser: { username: 'user', password: 'password', role: 'admin' },
 };
 let accessToken = null;
 
