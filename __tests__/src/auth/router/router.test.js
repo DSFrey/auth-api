@@ -111,6 +111,15 @@ describe('Auth Router', () => {
     expect(response.body).toEqual(expect.anything());
   });
 
+  it('Secret Route succeeds with a valid token', async () => {
+
+    const response = await mockRequest.get('/secret')
+      .set('Authorization', `Bearer ${accessToken}`);
+
+    expect(response.status).toBe(200);
+    expect(response.text).toEqual('Welcome to the secret area');
+  });
+
   it('Secret Route fails with invalid token', async () => {
     const response = await mockRequest.get('/secret')
       .set('Authorization', `bearer accessgranted`);

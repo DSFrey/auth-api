@@ -32,21 +32,19 @@ describe('Auth Middleware', () => {
 
   describe('user authentication', () => {
 
-    it('fails a login for a user (admin) with an incorrect token', () => {
+    it('fails a login for a user (admin) with an incorrect token', async () => {
 
       req.headers = {
         authorization: 'Bearer thisisabadtoken',
       };
 
-      return bearer(req, res, next)
-        .then(() => {
-          expect(next).not.toHaveBeenCalled();
-          expect(res.status).toHaveBeenCalledWith(403);
-        });
+      await bearer(req, res, next);
+      expect(next).not.toHaveBeenCalled();
+      expect(res.status).toHaveBeenCalledWith(403);
 
     });
 
-    it('logs in a user with a proper token', () => {
+    it('logs in a user with a proper token', async () => {
 
       const user = { username: 'admin' };
       const token = jwt.sign(user, process.env.SECRET, { expiresIn: 1000 * 60 * 24 });
@@ -55,10 +53,8 @@ describe('Auth Middleware', () => {
         authorization: `Bearer ${token}`,
       };
 
-      return bearer(req, res, next)
-        .then(() => {
-          expect(next).toHaveBeenCalledWith();
-        });
+      await bearer(req, res, next);
+      expect(next).toHaveBeenCalledWith();
 
     });
   });
